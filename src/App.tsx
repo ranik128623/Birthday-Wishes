@@ -5,7 +5,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Calendar } from 'lucide-react';
+import { Heart, Calendar, Lock } from 'lucide-react';
 import BackgroundParticles from './components/BackgroundParticles';
 import WelcomeScreen from './components/WelcomeScreen';
 import GiftReveal from './components/GiftReveal';
@@ -16,6 +16,11 @@ import { getBirthdayConfig, BirthdayConfig } from './lib/firebase';
 
 export default function App() {
   const [unlockedSurprise, setUnlockedSurprise] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [showPassKeyPrompt, setShowPassKeyPrompt] = useState(false);
+  const [passKeyValue, setPassKeyValue] = useState('');
+  const [passKeyError, setPassKeyError] = useState('');
+  
   const [config, setConfig] = useState<BirthdayConfig>({
     id: 'active',
     name: 'Naim',
@@ -31,6 +36,11 @@ export default function App() {
     const urlName = params.get('name');
     const urlRelation = params.get('relation');
     const urlDate = params.get('date');
+    const isAdminParam = params.get('admin') === 'true' || params.get('edit') === 'true';
+
+    if (isAdminParam) {
+      setShowAdmin(true);
+    }
 
     if (urlName || urlRelation || urlDate) {
       setConfig({
@@ -77,13 +87,19 @@ export default function App() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="flex items-center gap-2"
+          onDoubleClick={() => {
+            setShowPassKeyPrompt(true);
+            setPassKeyValue('');
+            setPassKeyError('');
+          }}
+          className="flex items-center gap-2 cursor-pointer active:scale-95 transition-transform"
+          title="Double-click to unlock customization"
           id="header-brand-logo"
         >
           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-rose-500 via-pink-500 to-amber-500 flex items-center justify-center shadow-lg shadow-rose-500/20">
             <Heart size={14} className="text-white fill-current animate-pulse" />
           </div>
-          <span className="text-xs font-bold tracking-[0.2em] text-glow-gold font-sans">
+          <span className="text-xs font-bold tracking-[0.2em] text-glow-gold font-sans select-none">
             CELEBRATING YOU
           </span>
         </motion.div>
@@ -138,7 +154,87 @@ export default function App() {
 
       {/* 4. Music Player Console & Deluxe Dynamic Customizer panel */}
       <MusicPlayer />
-      <AdminPanel currentConfig={config} onConfigChange={(updated) => setConfig(updated)} />
+      
+      {/* Admin Passkey Verification Prompt Modal */}
+      <AnimatePresence>
+        {showPassKeyPrompt && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md px-4 font-sans select-none">
+            {/* Soft backdrop click dismiss helper */}
+            <div className="absolute inset-0" onClick={() => setShowPassKeyPrompt(false)} />
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className="relative w-full max-w-sm bg-[#0a0514]/95 border border-rose-500/20 rounded-2xl p-6 md:p-8 shadow-2xl text-center glass"
+              id="admin-passkey-prompt-modal"
+            >
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-rose-500 to-amber-500 rounded-t-2xl" />
+
+              <div className="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/30 flex items-center justify-center mx-auto mb-4 text-rose-400">
+                <Lock size={20} />
+              </div>
+              
+              <h3 className="text-sm font-bold uppercase text-white tracking-widest mb-1">
+                ACCESS PERSONALIZATION
+              </h3>
+              <p className="text-[11px] text-white/50 mb-6 font-light">
+                Please enter your secure creator passcode to unlock edit options.
+              </p>
+
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                if (passKeyValue.trim() === '128623') {
+                  setShowAdmin(true);
+                  setShowPassKeyPrompt(false);
+                } else {
+                  setPassKeyError('❌ Double-check passcode! Access Denied.');
+                }
+              }} className="space-y-4">
+                <input
+                  type="password"
+                  value={passKeyValue}
+                  onChange={(e) => {
+                    setPassKeyValue(e.target.value);
+                    setPassKeyError('');
+                  }}
+                  placeholder="••••••"
+                  className="w-full text-center bg-white/5 border border-white/10 hover:border-white/20 focus:border-rose-400 rounded-xl px-4 py-3 font-mono tracking-[0.5em] text-sm text-white focus:outline-none transition-colors"
+                  autoFocus
+                />
+
+                {passKeyError && (
+                  <p className="text-[10px] text-rose-400 font-semibold animate-pulse">{passKeyError}</p>
+                )}
+
+                <div className="flex gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowPassKeyPrompt(false)}
+                    className="flex-1 cursor-pointer bg-white/5 hover:bg-white/10 text-white/70 hover:text-white rounded-xl py-2 px-3 text-xs font-semibold transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 cursor-pointer bg-rose-500 hover:bg-rose-600 text-white rounded-xl py-2 px-3 text-xs font-bold transition-colors shadow-lg shadow-rose-500/25"
+                  >
+                    Unlock
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {showAdmin && (
+        <AdminPanel 
+          currentConfig={config} 
+          onConfigChange={(updated) => setConfig(updated)} 
+          onClose={() => setShowAdmin(false)}
+        />
+      )}
 
       {/* 5. Minimal Cinematic design details in background margins */}
       <div className="absolute left-6 top-1/2 -translate-y-1/2 flex-col gap-12 hidden lg:flex select-none opacity-30 tracking-[0.2em] font-mono text-[9px] text-white/50 writing-vertical" id="margin-tag-left">
