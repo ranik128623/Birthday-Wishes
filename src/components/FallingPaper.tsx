@@ -18,10 +18,12 @@ interface PaperPiece {
   rotTargetX: number; // 3D flipping transitions
   rotTargetY: number;
   rotTargetZ: number;
+  isCircle: boolean;
 }
 
 export default function FallingPaper() {
   const [pieces, setPieces] = useState<PaperPiece[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Beautiful festive paper palette
   const paperColors = [
@@ -36,6 +38,16 @@ export default function FallingPaper() {
     '#ffe082', // Warm Yellow
   ];
 
+  useEffect(() => {
+    // Detect mobile device to scale down particle density
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const generatePiece = (id: string, initialSpawn = false): PaperPiece => {
     const sizeW = Math.random() * 8 + 6; // 6px to 14px width
     const sizeH = sizeW * (Math.random() * 1.5 + 0.6); // varying aspect ratios for realistic strips
@@ -46,33 +58,37 @@ export default function FallingPaper() {
       sizeW,
       sizeH,
       color: paperColors[Math.floor(Math.random() * paperColors.length)],
-      duration: Math.random() * 10 + 8, // Slow majestic weightless fall (8s to 18s)
-      delay: initialSpawn ? Math.random() * -12 : Math.random() * 2, // stagger spawn keys
-      swayX: Math.random() * 80 - 40, // sways left-to-right up to 40px
-      rotTargetX: Math.random() * 1080 - 540, // multiple 3D flips during descent
-      rotTargetY: Math.random() * 1080 - 540,
-      rotTargetZ: Math.random() * 720 - 360,
+      duration: Math.random() * 8 + 7, // Slow majestic weightless fall (7s to 15s)
+      delay: initialSpawn ? Math.random() * -12 : Math.random() * 1.5, // stagger spawn keys
+      swayX: Math.random() * 60 - 30, // sways left-to-right up to 30px
+      rotTargetX: Math.random() * 720 - 360, // 3D flips during descent
+      rotTargetY: Math.random() * 720 - 360,
+      rotTargetZ: Math.random() * 360 - 180,
+      isCircle: Math.random() > 0.85, // precalculate circle vs rectangular paper shred
     };
   };
 
   useEffect(() => {
-    // Populate an initial rich backdrop of 60 paper shreds to start instantly falling
-    const initialConfetti = Array.from({ length: 65 }, (_, i) => generatePiece(`confetti-init-${i}`, true));
+    // Keep count strictly lightweight on mobile to preserve 60 FPS smoothly
+    const limitCount = isMobile ? 22 : 65;
+    
+    // Populate an initial backdrop of paper shreds to start instantly falling
+    const initialConfetti = Array.from({ length: limitCount }, (_, i) => generatePiece(`confetti-init-${i}`, true));
     setPieces(initialConfetti);
 
     // Active replenishment interval to trickle new falling paper pieces
     const interval = setInterval(() => {
       setPieces((prev) => {
-        // Keep a steady beautiful storm of 65 particles
-        if (prev.length < 65) {
+        // Keep a steady beautiful storm of particles safely scaled for the device
+        if (prev.length < limitCount) {
           return [...prev, generatePiece(`confetti-spawn-${Math.random()}`, false)];
         }
         return prev;
       });
-    }, 450);
+    }, isMobile ? 600 : 450);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
 
   const handleComplete = (id: string) => {
     // Replace the fallen piece safely
@@ -121,8 +137,8 @@ export default function FallingPaper() {
               width: `${piece.sizeW}px`,
               height: `${piece.sizeH}px`,
               backgroundColor: piece.color,
-              boxShadow: '1px 1.5px 3px rgba(0,0,0,0.12)',
-              borderRadius: Math.random() > 0.85 ? '50%' : '1.5px', // occasionally circle confetti, mostly rectangular shreds
+              borderRadius: piece.isCircle ? '50%' : '1.5px',
+              willChange: 'transform, opacity',
             }}
           />
         );

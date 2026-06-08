@@ -118,7 +118,7 @@ export default function WelcomeScreen({ onOpenGift, name, relation }: WelcomeScr
           id="celebration-badge"
         >
           <Sparkles size={11} className="text-amber-400" />
-          A SPECIAL SURPRISE AWAITS YOU
+          তোমার জন্য একটি বিশেষ সারপ্রাইজ অপেক্ষা করছে
         </motion.div>
 
         {/* Heading */}
@@ -129,13 +129,13 @@ export default function WelcomeScreen({ onOpenGift, name, relation }: WelcomeScr
             transition={{ delay: 0.5, duration: 1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-glow-pink select-text"
           >
-            🎉 Happy Birthday, <br />
+            🎉 শুভ জন্মদিন, <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-rose-300 to-fuchsia-400">
               {relation} {name}
             </span>{' '}
             🎂
           </motion.h1>
-
+ 
           {/* Heartfelt Subtitle */}
           <motion.p
             initial={{ opacity: 0 }}
@@ -143,7 +143,7 @@ export default function WelcomeScreen({ onOpenGift, name, relation }: WelcomeScr
             transition={{ delay: 0.9, duration: 1 }}
             className="text-white/80 font-sans text-base md:text-lg font-light leading-relaxed max-w-lg mx-auto"
           >
-            Today is your special day, and you deserve all the happiness, laughter, and endless blessing in the world.
+            আজ তোমার বিশেষ দিন, আর পৃথিবীর সব সুখ, হাসি আর অফুরন্ত আশীর্বাদ যেন সবসময় তোমারই থাকে।
           </motion.p>
         </div>
 
@@ -162,17 +162,17 @@ export default function WelcomeScreen({ onOpenGift, name, relation }: WelcomeScr
           <span className="absolute inset-0 bg-white/25 -skew-x-12 translate-x-[-100%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out"></span>
           
           <Gift className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300 text-amber-100" />
-          <span className="tracking-wide">🎁 Open Your Gift</span>
+          <span className="tracking-wide">🎁 তোমার উপহারটি খোলো</span>
         </motion.button>
       </motion.div>
-
+ 
       {/* Gentle Scroll Indicator */}
       <div 
         onClick={handleOpenButtonClick}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/40 hover:text-white/70 transition-colors cursor-pointer z-10"
         id="scroll-helper"
       >
-        <span className="text-[10px] font-mono tracking-widest uppercase">Click or Scroll Down</span>
+        <span className="text-[10px] font-mono tracking-widest uppercase">এখানে ক্লিক করো অথবা নিচে যাও</span>
         <ChevronDown size={16} className="animate-bounce" />
       </div>
     </section>

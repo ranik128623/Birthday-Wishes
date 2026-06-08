@@ -94,14 +94,14 @@ export default function App() {
             setPassKeyError('');
           }}
           className="flex items-center gap-2 cursor-pointer active:scale-95 transition-transform"
-          title="Double-click to unlock customization"
+          title="কাস্টমাইজেশন আনলক করতে ডাবল-ক্লিক করুন"
           id="header-brand-logo"
         >
           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-rose-500 via-pink-500 to-amber-500 flex items-center justify-center shadow-lg shadow-rose-500/20">
             <Heart size={14} className="text-white fill-current animate-pulse" />
           </div>
           <span className="text-xs font-bold tracking-[0.2em] text-glow-gold font-sans select-none">
-            CELEBRATING YOU
+            উৎসব শুধু তোমার জন্য
           </span>
         </motion.div>
 
@@ -182,10 +182,10 @@ export default function App() {
               </div>
               
               <h3 className="text-sm font-bold uppercase text-white tracking-widest mb-1">
-                ACCESS PERSONALIZATION
+                কাস্টমাইজেশন প্যানেল
               </h3>
               <p className="text-[11px] text-white/50 mb-6 font-light">
-                Please enter your secure creator passcode to unlock edit options.
+                কাস্টমাইজেশন অপশনগুলো আনলক করতে অনুগ্রহ করে আপনার গোপন পাসকোডটি লিখুন।
               </p>
 
               <form onSubmit={(e) => {
@@ -194,7 +194,7 @@ export default function App() {
                   setShowAdmin(true);
                   setShowPassKeyPrompt(false);
                 } else {
-                  setPassKeyError('❌ Double-check passcode! Access Denied.');
+                  setPassKeyError('❌ ভুল পাসকোড! প্রবেশাধিকারে বাধা।');
                 }
               }} className="space-y-4">
                 <input
@@ -219,13 +219,13 @@ export default function App() {
                     onClick={() => setShowPassKeyPrompt(false)}
                     className="flex-1 cursor-pointer bg-white/5 hover:bg-white/10 text-white/70 hover:text-white rounded-xl py-2 px-3 text-xs font-semibold transition-colors"
                   >
-                    Cancel
+                    বাতিল
                   </button>
                   <button
                     type="submit"
                     className="flex-1 cursor-pointer bg-rose-500 hover:bg-rose-600 text-white rounded-xl py-2 px-3 text-xs font-bold transition-colors shadow-lg shadow-rose-500/25"
                   >
-                    Unlock
+                    আনলক করুন
                   </button>
                 </div>
               </form>
@@ -244,26 +244,25 @@ export default function App() {
 
       {/* 5. Minimal Cinematic design details in background margins */}
       <div className="absolute left-6 top-1/2 -translate-y-1/2 flex-col gap-12 hidden lg:flex select-none opacity-30 tracking-[0.2em] font-mono text-[9px] text-white/50 writing-vertical" id="margin-tag-left">
-        <span>✨ CELESTIAL VIBES ✨</span>
+        <span>✨ স্বর্গীয় অনুভূতি ✨</span>
         <span>•</span>
-        <span>PEACE • SUCCESS • MEMORIES</span>
+        <span>শান্তি • সাফল্য • স্মৃতি</span>
       </div>
       <div className="absolute right-6 top-1/2 -translate-y-1/2 flex-col gap-12 hidden lg:flex select-none opacity-30 tracking-[0.2em] font-mono text-[9px] text-white/50 writing-vertical" id="margin-tag-right">
-        <span>🎉 HAPPY BIRTHDAY 🎉</span>
+        <span>🎉 শুভ জন্মদিন 🎉</span>
         <span>•</span>
-        <span>HAPPINESS COGNIZANCE</span>
+        <span>সুখ ও সমৃদ্ধি</span>
       </div>
 
       {/* 6. Premium Crafted Footer Section */}
       <footer className="relative z-10 py-10 w-full border-t border-white/5 text-center mt-auto select-none" id="birthday-footer-row">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-3">
           <div className="flex items-center gap-1.5 text-xs text-white/55 font-light animate-pulse" id="footer-greetings">
-            <span>Made with</span>
+            <span>বিশেষ এক মানুষের জন্য পরম ভালোবাসায় তৈরি</span>
             <span className="text-rose-500 text-glow-pink">❤️</span>
-            <span>for a Special Person</span>
           </div>
           <p className="text-[10px] font-mono text-white/20 select-text">
-            © 2026 • Wishing you endless blessings and stellar success.
+            © ২০২৬ • তোমার জন্য অফুরন্ত আশীর্বাদ ও অসাধারণ সাফল্যের শুভকামনা।
           </p>
         </div>
       </footer>

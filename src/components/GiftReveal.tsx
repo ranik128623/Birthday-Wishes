@@ -20,12 +20,12 @@ export default function GiftReveal({ isActive }: GiftRevealProps) {
 
   // Heartfelt letter broken down into lines/paragraphs for elegant typed styling
   const birthdaySentences = [
-    "May every day of your future be filled with happiness, success, peace, and good health.",
-    "May your dreams come true one by one.",
-    "Stay strong during difficult times and always believe in yourself.",
-    "Take good care of your parents and cherish every moment with them.",
-    "May your life be filled with love, beautiful memories, and endless blessings.",
-    "Happy Birthday once again! ❤️"
+    "তোমার ভবিষ্যতের প্রতিটি দিন সুখ, সাফল্য, শান্তি আর সুস্বাস্থ্য দিয়ে ভরে উঠুক।",
+    "তোমার প্রতিটি সুন্দর স্বপ্ন যেন এক এক করে পূরণ হয়।",
+    "যেকোনো কঠিন পরিস্থিতিতেও শক্ত থেকো এবং সবসময় নিজের ওপর বিশ্বাস রেখো।",
+    "বাবা-মায়ের যত্ন নিও এবং তাদের সাথে কাটানো প্রতিটি মুহূর্তকে পরম সুখে আগলে রেখো।",
+    "তোমার জীবন সুন্দর স্মৃতি, ভালোবাসা আর অফুরন্ত আশীর্বাদে ধন্য হোক।",
+    "তোমাকে আবারও জানাই শুভ জন্মদিন! ❤️"
   ];
 
   // Confetti triggering function
@@ -152,8 +152,8 @@ export default function GiftReveal({ isActive }: GiftRevealProps) {
               id="interactive-box-wrapper"
             >
               <div className="text-center max-w-md select-none" id="unboxing-instructions">
-                <h3 className="text-2xl font-serif font-bold text-glow-gold mb-2">🎁 Your Birthday Present Is Ready</h3>
-                <p className="text-white/60 text-xs tracking-wider">TAP THE GIFT BOX BELOW TO UNWRAP YOUR SPECIAL SURPRISE</p>
+                <h3 className="text-2xl font-serif font-bold text-glow-gold mb-2">🎁 তোমার জন্মদিনের উপহার প্রস্তুত!</h3>
+                <p className="text-white/60 text-xs tracking-wider">উপহারের বাক্সটিতে চাপ দিয়ে তোমার বিশেষ সারপ্রাইজটি উন্মোচন করো</p>
               </div>
 
               {/* 3D Looking Vector Gift Box */}
@@ -205,7 +205,7 @@ export default function GiftReveal({ isActive }: GiftRevealProps) {
                 }`}
                 id="interactive-box-footer-badge"
               >
-                {boxState === 'vibrating' ? '⚡ Opening your present...' : '👉 Click the Box to Open'}
+                {boxState === 'vibrating' ? '⚡ উপহার খোলা হচ্ছে...' : '👉 উপহারটি খুলতে বক্সে ক্লিক করো'}
               </div>
             </motion.div>
           )}
@@ -230,7 +230,7 @@ export default function GiftReveal({ isActive }: GiftRevealProps) {
                 <div className="p-3 bg-rose-500/10 rounded-full border border-rose-500/20 text-rose-300 animate-pulse">
                   <FileText size={20} />
                 </div>
-                <h4 className="text-sm font-semibold tracking-widest text-rose-300 uppercase">A HEARTFELT NOTE FOR YOU</h4>
+                <h4 className="text-sm font-semibold tracking-widest text-rose-300 uppercase">তোমার জন্য একটি চিঠিপত্র</h4>
                 <div className="h-0.5 w-12 bg-rose-500/30 rounded-full"></div>
               </div>
 
@@ -280,7 +280,7 @@ export default function GiftReveal({ isActive }: GiftRevealProps) {
                     id="receipt-completion-badge"
                   >
                     <CheckCircle2 size={13} />
-                    <span>Unwrapped and read with love ❤️</span>
+                    <span>ভালোবাসার সাথে উপহারটি উন্মোচন করা হয়েছে ❤️</span>
                   </div>
 
                   {/* Pulsing smooth scrolling button */}
@@ -297,7 +297,7 @@ export default function GiftReveal({ isActive }: GiftRevealProps) {
                     id="goto-promises-scroll-btn"
                   >
                     <Sparkles size={14} className="text-yellow-100 group-hover:rotate-12 transition-transform" />
-                    <span>🌟 UNLOCK MY 5 GOLDEN PROMISES 🌟</span>
+                    <span>🌟 আমার ৫টি সোনালী প্রতিশ্রুতি উন্মোচন করো 🌟</span>
                   </motion.button>
                 </motion.div>
               )}

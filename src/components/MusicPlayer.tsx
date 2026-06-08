@@ -143,7 +143,7 @@ export default function MusicPlayer() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
           </span>
-          🎵 Click to play Birthday Ambience
+          🎵 জন্মদিনের সুর শুনতে এখানে ক্লিক করো
         </button>
       )}
 
@@ -160,7 +160,7 @@ export default function MusicPlayer() {
             <div className="flex items-center justify-between border-b border-white/10 pb-2">
               <span className="text-xs font-semibold text-rose-300 tracking-wider flex items-center gap-1">
                 <Music size={12} className={isPlaying ? 'animate-spin' : ''} />
-                SURPRISE SOUNDTRACK
+                সারপ্রাইজ সাউন্ডট্র্যাক
               </span>
               <button 
                 onClick={handlePlayPause}
@@ -180,7 +180,7 @@ export default function MusicPlayer() {
                 }`}
               >
                 <Music size={11} />
-                Music Box
+                মিউজিক বক্স
               </button>
               <button
                 onClick={() => handleTypeChange('mp3')}
@@ -189,16 +189,16 @@ export default function MusicPlayer() {
                 }`}
               >
                 <Radio size={11} />
-                Warm Piano
+                মিষ্টি পিয়ানো
               </button>
             </div>
 
             {/* Title / Equalizer */}
             <div className="flex items-center gap-3">
               <div className="flex-1 min-w-0" id="current-track-info">
-                <div className="text-[11px] text-white/50">Current Theme</div>
+                <div className="text-[11px] text-white/50">চলতি থিম</div>
                 <div className="text-xs font-bold truncate text-rose-100">
-                  {musicType === 'synth' ? '🧸 Lullaby Box (synthesised)' : '🎹 Beautiful Dream (lo-fi piano)'}
+                  {musicType === 'synth' ? '🧸 ঘুমপাড়ানি সুর (সিন্থেসাইজড)' : '🎹 সুন্দর স্বপ্ন (লো-ফাই পিয়ানো)'}
                 </div>
               </div>
 
@@ -231,7 +231,7 @@ export default function MusicPlayer() {
 
             {/* Dynamic Click to minimize helper */}
             <div className="text-[9px] text-white/30 text-center font-medium tracking-wide mt-1 select-none">
-              💡 Tap outside to shrink this panel
+              💡 প্যানেলটি ছোট করতে বাইরে ক্লিক করো
             </div>
           </div>
         ) : (

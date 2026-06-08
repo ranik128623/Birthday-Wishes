@@ -15,41 +15,41 @@ export default function SpecialWishes() {
   const wishes: WishCard[] = [
     {
       id: 'success',
-      title: 'Success in Life',
-      description: 'May your professional and personal endeavors soar. May every project you touch turn to gold, and may your talents be recognized and celebrated far and wide.',
-      category: 'CAREER & GROWTH',
+      title: 'জীবনে চূড়ান্ত সাফল্য',
+      description: 'তোমার কর্মজীবন ও ব্যক্তিগত জীবনের সমস্ত প্রচেষ্টা যেন অনন্য উচ্চতায় পৌঁছায়। তুমি যে কাজেই হাত দাও তা যেন সফলতায় রূপ নেয় এবং তোমার মেধার প্রশংসা যেন দিকে দিকে ছড়িয়ে পড়ে।',
+      category: 'পেশাজীবন ও উন্নতি',
       iconName: 'Trophy',
       gradient: 'from-amber-400 to-orange-500',
     },
     {
       id: 'health',
-      title: 'Good Health',
-      description: 'May you be blessed with vibrant longevity, boundless biological energy, and mental peace. May you stay protected, strong, and radiant every single day.',
-      category: 'VITALITY & WELLNESS',
+      title: 'চমৎকার সুস্বাস্থ্য',
+      description: 'পৃথিবীর সেরা সুস্থতা, দীর্ঘায়ু, অফুরন্ত প্রাণশক্তি আর মানসিক পরম শান্তি যেন তোমার চিরসঙ্গী হয়। তুমি যেন প্রতিদিন সুরক্ষিত, শক্তিশালী ও দীপ্তিময় থাকো।',
+      category: 'জীবনীশক্তি ও সুস্থতা',
       iconName: 'Heart',
       gradient: 'from-rose-400 to-pink-500',
     },
     {
       id: 'family',
-      title: 'Family Happiness',
-      description: 'May your household remain a safe haven of laughter, deep warmth, and ultimate harmony. Cherish every single second and make gorgeous, timeless memories with your parents.',
-      category: 'LOVE & HARMONY',
+      title: 'পারিবারিক সুখ ও শান্তি',
+      description: 'তোমার সুন্দর পরিবারটি যেন সবসময় হাসি, গভীর আন্তরিকতা এবং পরম শান্তিতে মুখরিত থাকে। মা-বাবার সাথে কাটানো প্রতিটি মুহূর্তকে পরম যত্নে আগলে রেখে চমৎকার সব স্মৃতি তৈরি করো।',
+      category: 'ভালোবাসা ও সম্প্রীতি',
       iconName: 'Home',
       gradient: 'from-emerald-400 to-cyan-500',
     },
     {
       id: 'dreams',
-      title: 'Achievement of Dreams',
-      description: 'May every lofty goal, silent prayer, and personal aspiration materialize one-by-one. Never stop believing in your beautiful potential; the cosmos is aligning for you.',
-      category: 'ASPIRATION & PURPOSE',
+      title: 'সব স্বপ্নের বাস্তবায়ন',
+      description: 'তোমার মনের গভীরের প্রতিটি লক্ষ্য, নীরব প্রার্থনা আর ব্যক্তিগত ইচ্ছাগুলো যেন একে একে বাস্তবে রূপ নেয়। নিজের অপার সম্ভাবনার ওপর বিশ্বাস কখনো হারিও না, পুরো মহাবিশ্ব তোমার সহায় আছে।',
+      category: 'আকাঙ্ক্ষা ও উদ্দেশ্য',
       iconName: 'Sparkles',
       gradient: 'from-fuchsia-400 to-violet-500',
     },
     {
       id: 'smiles',
-      title: 'Endless Smiles',
-      description: 'May sorrow stay far from your threshold. May genuine warmth, joy, and hearty humor paint your lips day-in and day-out, attracting happiness wherever you walk.',
-      category: 'JOY & OPTIMISM',
+      title: 'অফুরন্ত হাসিমুখ',
+      description: 'দুঃখ-কষ্ট যেন তোমার সীমানা থেকে অনেক দূরে থাকে। অফুরন্ত আনন্দ আর মনখোলা হাসি যেন সবসময় তোমার ঠোঁটে লেগে থাকে, যাতে তুমি যেখানেই যাও খুশি বিলিয়ে দিতে পারো।',
+      category: 'आनন্দ ও ইতিবাচকতা',
       iconName: 'Smile',
       gradient: 'from-blue-400 to-indigo-500',
     },
@@ -190,7 +190,7 @@ export default function SpecialWishes() {
             className="px-3.5 py-1 rounded-full bg-pink-500/10 border border-pink-500/25 text-[10px] font-bold tracking-[0.25em] text-pink-300 uppercase inline-flex items-center gap-1.5"
           >
             <Sparkle size={10} className="animate-spin text-amber-300" />
-            GOLDEN PROMISES FOR A BRIGHT FUTURE
+            উজ্জ্বল ভবিষ্যতের জন্য ৫টি সোনালী প্রতিশ্রুতি
           </motion.div>
         </div>
 
@@ -201,7 +201,7 @@ export default function SpecialWishes() {
           transition={{ delay: 0.1 }}
           className="text-3xl md:text-5xl font-serif font-bold text-glow-gold tracking-tight"
         >
-          Special Birthday Wishes For You
+          তোমার জন্য বিশেষ জন্মদিনের শুভেচ্ছা
         </motion.h2>
 
         <motion.p
@@ -210,7 +210,7 @@ export default function SpecialWishes() {
           viewport={{ once: true }}
           className="text-white/70 max-w-lg mx-auto text-xs md:text-sm font-light select-text"
         >
-          Tap the locked golden packages below one-by-one to unwrap my special blessings for your future life.
+          নিচের বন্ধ সোনালী গিফটগুলোতে একে একে চাপ দিয়ে তোমার ভবিষ্যৎ জীবনের জন্য আমার বিশেষ আশীর্বাদ ও শুভকামনাগুলো উন্মোচন করো।
         </motion.p>
       </div>
 
@@ -218,10 +218,10 @@ export default function SpecialWishes() {
       <div className="w-full max-w-md bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col gap-2.5 shadow-xl glass" id="unlock-tracker-panel">
         <div className="flex justify-between items-center text-xs font-semibold">
           <span className="text-rose-300 tracking-wider flex items-center gap-1">
-            🎁 BLESSINGS UNWRAPPED:
+            🎁 উন্মোচিত শুভেচ্ছা:
           </span>
           <span className="font-mono text-amber-200 bg-white/5 py-1 px-2.5 rounded-lg border border-white/10">
-            {unlockedWishes.length} of {wishes.length} Revealed
+            {unlockedWishes.length} / {wishes.length} টি উন্মোচিত হয়েছে
           </span>
         </div>
         <div className="w-full bg-white/10 h-2.5 rounded-full overflow-hidden relative">
@@ -232,11 +232,11 @@ export default function SpecialWishes() {
         </div>
         {unlockedWishes.length === wishes.length ? (
           <div className="text-[11px] text-emerald-400 text-center font-bold tracking-widest uppercase mt-0.5 animate-pulse flex items-center justify-center gap-1">
-            <Check size={11} /> All wishes unlocked! May your year ahead be majestic! ❤️
+            <Check size={11} /> সবগুলো শুভেচ্ছা উন্মোচিত হয়েছে! তোমার সামনের বছরটি অসাধারণ কাটুক! ❤️
           </div>
         ) : (
           <div className="text-[10px] text-white/40 text-center font-medium tracking-wide">
-            👆 Touch each sealed box below to unfold the magic inside!
+            👆 ভেতরের জাদু উন্মোচন করতে নিচের প্রতিটি সিল করা গিফটে চাপ দাও!
           </div>
         )}
       </div>
@@ -278,13 +278,13 @@ export default function SpecialWishes() {
                       </div>
 
                       <span className="text-[9px] font-mono tracking-[0.2em] text-amber-300 font-bold uppercase mb-1">
-                        GOLDEN BLESSING #{index + 1}
+                        সোনালী শুভেচ্ছা #{index + 1}
                       </span>
                       <h3 className="text-base font-serif font-bold text-white group-hover:text-amber-100 transition-colors">
-                        🔓 Unwrap Sweet Promise
+                        🔓 মিষ্টি প্রতিশ্রুতি উন্মোচন করো
                       </h3>
                       <p className="text-[10px] text-white/40 mt-1 uppercase font-semibold tracking-wider">
-                        TAP TO SECURE SURPRISE
+                        সারপ্রাইজ পেতে ক্লিক করো
                       </p>
                     </motion.div>
                   ) : (
@@ -300,7 +300,7 @@ export default function SpecialWishes() {
 
                       {/* Revealed checkmark absolute badge */}
                       <div className="absolute top-3 left-3 bg-emerald-500/10 border border-emerald-500/20 py-0.5 px-2 rounded-full text-emerald-400 text-[8px] font-bold tracking-widest uppercase flex items-center gap-0.5 animate-pulse">
-                        <Check size={8} /> Opened
+                        <Check size={8} /> উন্মোচিত
                       </div>
 
                       {/* Layout Header block */}
