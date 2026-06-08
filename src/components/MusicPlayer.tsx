@@ -10,7 +10,7 @@ import { musicEngine } from '../utils/audio';
 export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [volume, setVolume] = useState(30); // 30% default low volume
+  const [volume, setVolume] = useState(45); // 45% default medium volume
   const [musicType, setMusicType] = useState<'synth' | 'mp3'>('synth');
   const [showControls, setShowControls] = useState(false);
   const [autoplayBlocked, setAutoplayBlocked] = useState(false);
@@ -25,7 +25,7 @@ export default function MusicPlayer() {
     setMusicType(musicEngine.getPlaybackType());
 
     // Set engine volume to comfortable default
-    musicEngine.setVolume(0.3);
+    musicEngine.setVolume(0.45);
 
     // Try standard autoplay trigger
     const triggerAutoplay = () => {

@@ -7,7 +7,7 @@ class BirthdayAudioEngine {
   private ctx: AudioContext | null = null;
   private melodyTimeoutId: any = null;
   private isCurrentlyPlaying = false;
-  private currentVolume = 0.35; // default low-to-medium volume
+  private currentVolume = 0.45; // default medium volume
   private isMuted = false;
   
   // Audio Nodes

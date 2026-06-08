@@ -12,6 +12,7 @@ import GiftReveal from './components/GiftReveal';
 import SpecialWishes from './components/SpecialWishes';
 import MusicPlayer from './components/MusicPlayer';
 import AdminPanel from './components/AdminPanel';
+import FallingPaper from './components/FallingPaper';
 import { getBirthdayConfig, BirthdayConfig } from './lib/firebase';
 
 export default function App() {
@@ -129,25 +130,30 @@ export default function App() {
         {/* Layer 2 and 3: Birthday surprise reveal zones */}
         <AnimatePresence>
           {unlockedSurprise && (
-            <motion.div
-              ref={giftSectionRef}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              className="w-full flex flex-col gap-16 pb-24"
-              id="surprise-content-unfolded"
-            >
-              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+            <>
+              {/* Dynamic falling paper shreds floating all over the unlocked website */}
+              <FallingPaper />
 
-              {/* Layer 2: The Gift Box Unwrapping and Letter typing */}
-              <GiftReveal isActive={unlockedSurprise} />
+              <motion.div
+                ref={giftSectionRef}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                className="w-full flex flex-col gap-16 pb-24"
+                id="surprise-content-unfolded"
+              >
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
 
-              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+                {/* Layer 2: The Gift Box Unwrapping and Letter typing */}
+                <GiftReveal isActive={unlockedSurprise} />
 
-              {/* Layer 3: The Special Staggered Wish Cards */}
-              <SpecialWishes />
-            </motion.div>
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+
+                {/* Layer 3: The Special Staggered Wish Cards */}
+                <SpecialWishes />
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </main>
