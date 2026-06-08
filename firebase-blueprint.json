@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "BirthdayConfig": {
+      "title": "BirthdayConfig",
+      "description": "Details of the active birthday celebration profile.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier, usually active"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the birthday celebrity"
+        },
+        "relation": {
+          "type": "string",
+          "description": "The custom relation or prefix greeting, e.g. My Dear Friend"
+        },
+        "date": {
+          "type": "string",
+          "description": "The formatted date of celebration"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when configuration was modified"
+        }
+      },
+      "required": ["id", "name", "relation", "date"]
+    }
+  },
+  "firestore": {
+    "/birthday_config/{configId}": {
+      "schema": "BirthdayConfig",
+      "description": "Stores the single active configuration for the birthday website"
+    }
+  }
+}
