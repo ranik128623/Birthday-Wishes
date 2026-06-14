@@ -23,6 +23,7 @@ export default function AdminPanel({ currentConfig, onConfigChange, onClose }: A
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [copiedLink, setCopiedLink] = useState(false);
+  const [generatedUrl, setGeneratedUrl] = useState('');
 
   // Synchronize dynamic updates loaded from Firestore cloud trigger after initial mount
   React.useEffect(() => {
@@ -61,12 +62,12 @@ export default function AdminPanel({ currentConfig, onConfigChange, onClose }: A
     setErrorMessage('');
 
     if (!name.trim()) {
-      setErrorMessage('❌ Recipient name is required!');
+      setErrorMessage('❌ যাকে পাঠাবেন তার নাম দেওয়া আবশ্যক!');
       return;
     }
 
     if (!relation.trim()) {
-      setErrorMessage('❌ Salutation / greeting prefix is required!');
+      setErrorMessage('❌ শুভেচ্ছাসূচক সম্বোধন দেওয়া আবশ্যক!');
       return;
     }
 
@@ -74,20 +75,27 @@ export default function AdminPanel({ currentConfig, onConfigChange, onClose }: A
       id: 'custom',
       name: name.trim(),
       relation: relation.trim(),
-      date: date.trim() || 'June 8, 2026',
+      date: date.trim() || 'June 15, 2026',
     };
 
     // Feed changes back to Parent App state dynamically
     onConfigChange(newConfig);
 
     // Build the query parameter URL
-    const baseUrl = window.location.origin + window.location.pathname;
+    // Convert dev sub-domain to the public shared pre-domain so anyone can access it!
+    let shareableOrigin = window.location.origin;
+    if (shareableOrigin.includes('-dev-')) {
+      shareableOrigin = shareableOrigin.replace('-dev-', '-pre-');
+    }
+    const baseUrl = shareableOrigin + window.location.pathname;
+    
     const params = new URLSearchParams();
     params.set('name', newConfig.name);
     params.set('relation', newConfig.relation);
     params.set('date', newConfig.date);
     
     const finalUrl = `${baseUrl}?${params.toString()}`;
+    setGeneratedUrl(finalUrl);
 
     // Copy to clipboard
     navigator.clipboard.writeText(finalUrl).then(() => {
@@ -105,9 +113,11 @@ export default function AdminPanel({ currentConfig, onConfigChange, onClose }: A
       setTimeout(() => {
         setCopiedLink(false);
         setSaveSuccess(false);
-      }, 3500);
+      }, 4000);
     }).catch(() => {
-      setErrorMessage('❌ Failed to copy link automatically. Please copy the URL from browser window.');
+      // If direct navigator clipboard copy is restricted, we still generate it perfectly in state
+      setSaveSuccess(true);
+      playSuccessChime();
     });
   };
 
@@ -137,8 +147,8 @@ export default function AdminPanel({ currentConfig, onConfigChange, onClose }: A
                   <Sparkles size={16} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold uppercase text-white tracking-widest">PERSONALIZATION PANEL</h3>
-                  <p className="text-[10px] text-white/50 tracking-wide font-medium">Design custom layouts for different friends</p>
+                  <h3 className="text-sm font-bold uppercase text-white tracking-widest">কাস্টমাইজেশন প্যানেল</h3>
+                  <p className="text-[10px] text-white/50 tracking-wide font-medium">আপনার বন্ধুদের জন্য কাস্টম শুভেচ্ছা লিংক তৈরি করুন</p>
                 </div>
               </div>
               <button
@@ -154,7 +164,7 @@ export default function AdminPanel({ currentConfig, onConfigChange, onClose }: A
             <div className="mb-5 bg-white/5 border border-white/10 p-3.5 rounded-xl flex gap-2.5 select-text">
               <HelpCircle size={32} className="text-amber-300 shrink-0 mt-0.5" />
               <div className="text-[11px] leading-relaxed text-white/80 select-text">
-                <span className="font-semibold text-amber-200">How to use:</span> Fill out the name, greeting salutation, and celebration date below. Click <span className="font-semibold text-rose-300">"BUILD & COPY CUSTOM URL"</span> to instantly generate and copy a unique link with their wishes locked in!
+                <span className="font-semibold text-amber-200">কিভাবে ব্যবহার করবেন:</span> নিচে নাম, শুভেচ্ছাসূচক সম্বোধন এবং উদযাপনের তারিখটি লিখুন। এরপর <span className="font-semibold text-rose-300">"লিংক তৈরি করুন এবং কপি করুন"</span> বাটনে ক্লিক করলে আপনার বন্ধুর জন্য একটি বিশেষ লিংক তৈরি হয়ে চমৎকারভাবে কপি হয়ে যাবে!
               </div>
             </div>
 
@@ -163,50 +173,50 @@ export default function AdminPanel({ currentConfig, onConfigChange, onClose }: A
               {/* Greeting / Relation prefix */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-semibold text-rose-300 uppercase tracking-widest flex items-center gap-1">
-                  Greeting Prefix / Salutation
+                  শুভেচ্ছাসূচক সম্বোধন
                 </label>
                 <input
                   type="text"
                   value={relation}
                   onChange={(e) => setRelation(e.target.value)}
-                  placeholder="e.g. My Dear Friend, Respected, Dear"
+                  placeholder="যেমন: অতি প্রিয় বন্ধু, প্রিয়, প্রাণপ্রিয়"
                   maxLength={70}
                   className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-rose-400 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none transition-colors"
                 />
-                <span className="text-[9px] text-white/40">Greeting wording shown before the name (e.g. "My Dear Friend").</span>
+                <span className="text-[9px] text-white/40">নামের আগে যে পরম ভালোবাসাময় সম্বোধনটি দেখাবে (যেমন: "প্রিয়তম বন্ধু")।</span>
               </div>
 
               {/* Birthday Name */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-semibold text-rose-300 uppercase tracking-widest flex items-center gap-1">
-                  Celebrity Name
+                  বন্ধুর নাম
                 </label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Naim, Puja Didi"
+                  placeholder="যেমন: Naim, রাজিব"
                   maxLength={50}
                   required
                   className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-rose-400 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none transition-colors"
                 />
-                <span className="text-[9px] text-white/40">Target name of the birthday star.</span>
+                <span className="text-[9px] text-white/40">যার জন্মদিন তার আসল বা ডাক নাম।</span>
               </div>
 
               {/* Event Celebration Date */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-semibold text-rose-300 uppercase tracking-widest">
-                  Celebration Date
+                  উদযাপনের তারিখ
                 </label>
                 <input
                   type="text"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  placeholder="e.g. June 12, 2026, or June 8"
+                  placeholder="যেমন: June 15, 2026, অথবা ১৫ জুন"
                   maxLength={35}
                   className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-rose-400 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none transition-colors"
                 />
-                <span className="text-[9px] text-white/40">Dynamic date updating top-right layout badges automatically.</span>
+                <span className="text-[9px] text-white/40">উদযাপনের তারিখ। এটি ডান কোণায় এবং থিমের সাথে অটোমেটিক দেখা যাবে।</span>
               </div>
 
               {/* Error messages display */}
@@ -218,9 +228,11 @@ export default function AdminPanel({ currentConfig, onConfigChange, onClose }: A
 
               {/* Success messages display */}
               {saveSuccess && (
-                <div className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl font-bold flex items-center gap-2" id="admin-success-text">
-                  <ShieldCheck size={16} className="text-emerald-400 animate-bounce" />
-                  <span>Customized link is built and copied to your clipboard! ✨</span>
+                <div className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl font-bold flex flex-col gap-1" id="admin-success-text">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck size={16} className="text-emerald-400 animate-bounce" />
+                    <span>আপনার বন্ধুদের জন্য কাস্টমাইজড লিংকটি সফলভাবে তৈরি হয়েছে! ✨</span>
+                  </div>
                 </div>
               )}
 
@@ -233,9 +245,43 @@ export default function AdminPanel({ currentConfig, onConfigChange, onClose }: A
                   id="admin-copy-link-btn"
                 >
                   <Link size={13} className="text-white animate-pulse" />
-                  <span>{copiedLink ? '📋 COPIED TO CLIPBOARD!' : '📋 BUILD & COPY CUSTOM URL'}</span>
+                  <span>{copiedLink ? '📋 লিংক কপি করা হয়েছে!' : '📋 লিংক তৈরি ও কপি করুন'}</span>
                 </button>
               </div>
+
+              {/* Display generated link layout for manual copy */}
+              {generatedUrl && (
+                <div className="mt-4 p-3.5 bg-white/5 border border-white/10 rounded-2xl space-y-2.5 select-text">
+                  <div className="text-[10px] font-bold text-amber-300 uppercase tracking-widest flex items-center gap-1.5">
+                    <Globe size={11} className="text-amber-400" />
+                    <span>আপনার বন্ধুর জন্য বিশেষ লিংক:</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      readOnly
+                      value={generatedUrl}
+                      className="w-full bg-[#18122b]/60 border border-white/10 rounded-xl px-3 py-2 text-[11px] font-mono text-purple-200 focus:outline-none select-all"
+                      onClick={(e) => (e.target as HTMLInputElement).select()}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(generatedUrl).then(() => {
+                          setCopiedLink(true);
+                          setTimeout(() => setCopiedLink(false), 2500);
+                        });
+                      }}
+                      className="shrink-0 bg-white/10 hover:bg-white/15 border border-white/10 text-white hover:text-amber-200 px-3 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-colors"
+                    >
+                      {copiedLink ? 'কপি হয়েছে' : 'কপি করুন'}
+                    </button>
+                  </div>
+                  <p className="text-[9.5px] leading-relaxed text-emerald-400/90 font-medium">
+                    💡 এই লিংকটি আপনার বন্ধুকে পাঠান। এটি ওপেন করলে আপনার বন্ধু সম্পুর্ণ বাংলায় চমৎকার এবং ল্যাগ-মুক্ত সুন্দর সারপ্রাইজটি দেখতে পাবে!
+                  </p>
+                </div>
+              )}
             </form>
           </motion.div>
         </div>

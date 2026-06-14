@@ -26,7 +26,7 @@ export default function App() {
     id: 'active',
     name: 'Naim',
     relation: 'My Dear Friend',
-    date: 'June 8, 2026',
+    date: 'June 15, 2026',
   });
   
   const giftSectionRef = useRef<HTMLDivElement | null>(null);
@@ -48,7 +48,7 @@ export default function App() {
         id: 'url-param',
         name: urlName || 'Naim',
         relation: urlRelation || 'Dear',
-        date: urlDate || 'June 8, 2026',
+        date: urlDate || 'June 15, 2026',
       });
     } else {
       // 2. Fetch live data from Firestore cloud database instance
