@@ -5,7 +5,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Calendar, Lock } from 'lucide-react';
+import { Heart, Calendar, Lock, Facebook, Linkedin, Instagram } from 'lucide-react';
 import BackgroundParticles from './components/BackgroundParticles';
 import WelcomeScreen from './components/WelcomeScreen';
 import GiftReveal from './components/GiftReveal';
@@ -264,6 +264,57 @@ export default function App() {
           <p className="text-[10px] font-mono text-white/20 select-text">
             © ২০২৬ • তোমার জন্য অফুরন্ত আশীর্বাদ ও অসাধারণ সাফল্যের শুভকামনা।
           </p>
+
+          {/* Made by Ranik with beautiful hoverable social icons */}
+          <div className="mt-6 pt-5 border-t border-white/5 w-full max-w-xs flex flex-col items-center gap-3">
+            <a 
+              href="https://www.linkedin.com/in/ranik-sen"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/ranik flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-rose-500/30 transition-all duration-300 shadow-md hover:shadow-rose-500/5 cursor-pointer"
+              id="made-by-badge"
+            >
+              <span className="text-[10px] font-mono tracking-widest text-white/45 group-hover/ranik:text-white/60 uppercase">
+                Made by
+              </span>
+              <span className="text-xs font-bold text-rose-300 group-hover/ranik:text-amber-300 transition-colors">
+                Ranik
+              </span>
+            </a>
+
+            <div className="flex items-center gap-3.5">
+              <a 
+                href="#" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title="Facebook"
+                className="p-2 rounded-full bg-[#1877F2]/10 hover:bg-[#1877F2]/20 text-[#1877F2] border border-[#1877F2]/30 hover:border-[#1877F2]/50 transition-all duration-300 hover:scale-110 cursor-pointer"
+                id="social-link-facebook"
+              >
+                <Facebook size={14} />
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/ranik-sen" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title="LinkedIn"
+                className="p-2 rounded-full bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 text-[#0A66C2] border border-[#0A66C2]/30 hover:border-[#0A66C2]/50 transition-all duration-300 hover:scale-110 cursor-pointer"
+                id="social-link-linkedin"
+              >
+                <Linkedin size={14} />
+              </a>
+              <a 
+                href="#" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title="Instagram"
+                className="p-2 rounded-full bg-[#E1306C]/10 hover:bg-[#E1306C]/20 text-[#E1306C] border border-[#E1306C]/30 hover:border-[#E1306C]/50 transition-all duration-300 hover:scale-110 cursor-pointer"
+                id="social-link-instagram"
+              >
+                <Instagram size={14} />
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
