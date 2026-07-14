@@ -274,8 +274,8 @@ export default function App() {
               className="group/ranik flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-rose-500/30 transition-all duration-300 shadow-md hover:shadow-rose-500/5 cursor-pointer"
               id="made-by-badge"
             >
-              <span className="text-[10px] font-mono tracking-widest text-white/45 group-hover/ranik:text-white/60 uppercase">
-                Made by
+              <span className="text-[10px] font-mono tracking-wide text-white/45 group-hover/ranik:text-white/60">
+                Just a little wish, From 
               </span>
               <span className="text-xs font-bold text-rose-300 group-hover/ranik:text-amber-300 transition-colors">
                 Ranik
