@@ -284,7 +284,7 @@ export default function App() {
 
             <div className="flex items-center gap-3.5">
               <a 
-                href="#" 
+                href="https://www.facebook.com/ranik.sen.202024" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 title="Facebook"
@@ -304,7 +304,7 @@ export default function App() {
                 <Linkedin size={14} />
               </a>
               <a 
-                href="#" 
+                href="https://www.instagram.com/_ranik_sen/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 title="Instagram"
